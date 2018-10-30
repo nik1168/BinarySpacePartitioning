@@ -10,5 +10,11 @@ class Point:
     def get_x(self):
         return int(self.x)
 
+    def set_x(self, x):
+        self.x = x
+
     def get_y(self):
         return int(self.y)
+
+    def set_y(self, y):
+        self.y = y
