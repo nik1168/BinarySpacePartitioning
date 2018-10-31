@@ -38,12 +38,10 @@ class BSPHandler:
             elif direction == constants.DOWN:
                 segments_down.append(segment)
             else:
-                segments_intersect.append(segment)
-        if len(segments_intersect) > 0:
-            segments_up_intersection, segments_down_intersection = self.split_intersection_into_segments(
-                segments_intersect, parent_segment)
-            segments_up.extend(segments_up_intersection)
-            segments_down.extend(segments_down_intersection)
+                segment_up_intersection, segment_down_intersection = self.split_intersection_into_segment(segment,
+                                                                                                          parent_segment)
+                segments_up.append(segment_up_intersection)
+                segments_down.append(segment_down_intersection)
         return segments_up, segments_down
 
     def split_intersection_into_segments(self, segments_intersect, parent_segment):
@@ -64,3 +62,16 @@ class BSPHandler:
             segments_down_intersection.append(segment_down_intersection)
 
         return segments_up_intersection, segments_down_intersection
+
+    def split_intersection_into_segment(self, segment_intersect, parent_segment):
+        x_intersection, y_intersection = self.line_segment_manager.get_intersection_point(segment_intersect,
+                                                                                          parent_segment)
+        segment_up_intersection = LineSegment(segment_intersect.get_identifier() + "1", x_intersection,
+                                              y_intersection,
+                                              segment_intersect.end_point.get_x(),
+                                              segment_intersect.end_point.get_y())
+        segment_down_intersection = LineSegment(segment_intersect.get_identifier() + "2",
+                                                segment_intersect.start_point.get_x(),
+                                                segment_intersect.start_point.get_y(), x_intersection,
+                                                y_intersection)
+        return segment_up_intersection, segment_down_intersection
