@@ -1,5 +1,6 @@
-from point import Point
 from math import hypot
+
+from point import Point
 
 
 class LineSegment:
@@ -7,6 +8,9 @@ class LineSegment:
         self.identifier = identifier
         self.start_point = Point(x_begin, x_end)
         self.end_point = Point(y_begin, y_end)
+
+    def get_identifier(self):
+        return self.identifier
 
     def get_length(self):
         return hypot(self.end_point.get_x() - self.start_point.get_x(), self.end_point.get_y() -
@@ -25,7 +29,15 @@ class LineSegment:
     def print_straight_line(self):
         print("Line Solution is y = {m}x + {b}".format(m=self.get_slope(), b=self.get_displacement()))
 
+    def get_line(self):
+        a = (self.start_point.get_y() - self.end_point.get_y())
+        b = (self.end_point.get_x() - self.start_point.get_x())
+        c = (self.start_point.get_x() * self.end_point.get_y() - self.end_point.get_x() * self.start_point.get_y())
+        return a, b, -c
+
     def get_y_based_on_x(self, x):
+        if self.get_slope() is None:
+            return x
         return (self.get_slope() * x) + self.get_displacement()
 
     def display(self):

@@ -12,10 +12,35 @@ class LineSegmentManager:
         first_point_position = self.get_direction_relative_to_point(y_prime_start, segment.start_point.get_y())
         second_point_position = self.get_direction_relative_to_point(y_prime_end, segment.end_point.get_y())
         direction_of_segment = self.get_segment_position_relative_to_points(first_point_position, second_point_position)
-        print("First point direction: ", first_point_position)
-        print("Second point direction: ", second_point_position)
-        print("direction_of_segment: ", direction_of_segment)
         return direction_of_segment
+
+    def get_intersection_point(self, line_segment_a, line_segment_b):
+
+        l1_prime = line_segment_a.get_line()
+        l2_prime = line_segment_b.get_line()
+        r = self.intersection(l1_prime, l2_prime)
+        if r:
+            print("Intersection detected:", r)
+        else:
+            print("No single intersection point detected")
+        return r
+
+    def line(self, p1, p2):
+        a = (p1[1] - p2[1])
+        b = (p2[0] - p1[0])
+        c = (p1[0] * p2[1] - p2[0] * p1[1])
+        return a, b, -c
+
+    def intersection(self, l1, l2):
+        d = l1[0] * l2[1] - l1[1] * l2[0]
+        dx = l1[2] * l2[1] - l1[1] * l2[2]
+        dy = l1[0] * l2[2] - l1[2] * l2[0]
+        if d != 0:
+            x = dx / d
+            y = dy / d
+            return x, y
+        else:
+            return False
 
     def get_direction_relative_to_point(self, y_prime, y_segment):
         if y_prime < y_segment:

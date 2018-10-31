@@ -1,9 +1,9 @@
 import numpy as np
 
-from plane import Plane
-from line_segment import LineSegment
 from bsp_handler import BSPHandler
+from line_segment import LineSegment
 from line_segment_manager import LineSegmentManager
+from plane import Plane
 
 
 class Main:
@@ -14,25 +14,18 @@ class Main:
 
     def run(self):
         print("Running main")
-        a_segment = LineSegment("A", 1, 2, 5, 4)
-        print("Slope of a_segment", a_segment.get_slope())
-        a_segment.print_straight_line()
+        a_segment = LineSegment("A", 6, 4, 7, 4)
         self.plane.add_segment(a_segment)
-        b_segment = LineSegment("B", 2, 0, 2, 1)
-        print("Slope of b_segment", b_segment.get_slope())
-        b_direction_relative_to_a = self.line_segment_manager.get_segment_direction_relative_to_straight_line(b_segment,
-                                                                                                              a_segment)
-        print("b_direction_relative_to_a", b_direction_relative_to_a)
+        b_segment = LineSegment("B", 4, 3, 4, 5)
         self.plane.add_segment(b_segment)
-        c_segment = LineSegment("C", 6, 1, 8, 5)
-        print("Slope of c_segment", c_segment.get_slope())
+        c_segment = LineSegment("C", 8, 1, 10, 5)
         self.plane.add_segment(c_segment)
-        d_segment = LineSegment("D", 3, 1, 1, 5)
-        print("Slope of d_segment", d_segment.get_slope())
+        d_segment = LineSegment("D", 5, 1, 2, 5)
+        self.line_segment_manager.get_intersection_point(a_segment, d_segment)
         self.plane.add_segment(d_segment)
-        self.plane.print_segments()
         random_permutation_segments = np.random.permutation(self.plane.get_line_segments())
-        print("Random permutation: ", random_permutation_segments)
+        print("Random permutation")
+        [print(segment.display()) for segment in random_permutation_segments]
         bsp_handler = BSPHandler(random_permutation_segments)
         bsp_handler.execute()
 
