@@ -1,4 +1,6 @@
 import constants
+
+
 class LineSegmentManager:
 
     def __init__(self):
@@ -30,5 +32,3 @@ class LineSegmentManager:
             return constants.DOWN
         else:
             return constants.INTERSECTS
-
-
