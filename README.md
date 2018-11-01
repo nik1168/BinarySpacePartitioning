@@ -11,8 +11,10 @@ brew install python
 
 ## Run
 
-To run the program run the following command:
+To run the program run either of the following commands:
 
 ```shell
-python3 main.py
+python3 main.py test/line_segments_1.txt
+python3 main.py test/line_segments_2.txt
+python3 main.py test/line_segments_3.txt
 ```
