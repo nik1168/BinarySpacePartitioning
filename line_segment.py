@@ -17,7 +17,7 @@ class LineSegment:
                      self.start_point.get_y())
 
     def get_slope(self):
-        if self.end_point.get_x() == self.start_point.get_x():
+        if float(self.end_point.get_x()) == float(self.start_point.get_x()):
             return None
         else:
             return (float((self.end_point.get_y() - self.start_point.get_y()) / (

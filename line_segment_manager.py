@@ -6,11 +6,26 @@ class LineSegmentManager:
     def __init__(self):
         pass
 
+    def get_vertical_line_position(self, point_x_segment, point_x_parent):
+        if point_x_segment < point_x_parent:
+            direction = constants.UP
+        elif point_x_segment > point_x_parent:
+            direction = constants.DOWN
+        else:
+            direction = constants.INTERSECTS
+        return direction
+
     def get_segment_direction_relative_to_straight_line(self, segment, compare_to_segment):
-        y_prime_start = compare_to_segment.get_y_based_on_x(segment.start_point.get_x())
-        y_prime_end = compare_to_segment.get_y_based_on_x(segment.end_point.get_x())
-        first_point_position = self.get_direction_relative_to_point(y_prime_start, segment.start_point.get_y())
-        second_point_position = self.get_direction_relative_to_point(y_prime_end, segment.end_point.get_y())
+        if compare_to_segment.get_slope() is None:
+            first_point_position = self.get_vertical_line_position(segment.start_point.get_x(),
+                                                                   compare_to_segment.start_point.get_x())
+            second_point_position = self.get_vertical_line_position(segment.end_point.get_x(),
+                                                                    compare_to_segment.end_point.get_x())
+        else:
+            y_prime_start = compare_to_segment.get_y_based_on_x(segment.start_point.get_x())
+            y_prime_end = compare_to_segment.get_y_based_on_x(segment.end_point.get_x())
+            first_point_position = self.get_direction_relative_to_point(y_prime_start, segment.start_point.get_y())
+            second_point_position = self.get_direction_relative_to_point(y_prime_end, segment.end_point.get_y())
         direction_of_segment = self.get_segment_position_relative_to_points(first_point_position, second_point_position)
         return direction_of_segment
 
