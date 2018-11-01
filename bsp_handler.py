@@ -7,16 +7,16 @@ class BSPHandler:
     def __init__(self, line_segments):
         self.line_segments = line_segments
         self.line_segment_manager = LineSegmentManager()
-        self.counter = 0
+        self.node_counter = 0
 
     def execute(self):
         print("Executing algorithm ")
         self.handle_list(self.line_segments)
-        print("Counter")
-        print(self.counter)
+        print("Node counter")
+        print(self.node_counter)
 
     def handle_list(self, line_segments):
-        self.counter = self.counter + 1
+        self.node_counter = self.node_counter + 1
         root_segment = line_segments[0]
         segments_up, segments_down = self.get_segments_directions_relative_to_parent_node(
             root_segment, line_segments[1:])

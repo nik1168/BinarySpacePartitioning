@@ -14,26 +14,21 @@ class Main:
 
     def run(self):
         print("Running main")
-        # self.test1()
-        # self.test_example()
-        self.test_sebas()
-        # self.test_nik()
+        # self.test_segments_1()
+        self.test_segments_4()
         print("All possible permutations")
         all_possible_permutation = list(itertools.permutations(self.plane.get_line_segments()))
         counter_array = []
         for i, permutation in enumerate(all_possible_permutation):
-            print("Permutacion: ", i)
+            print("Permutation: ", i)
             [print(segment.display()) for segment in permutation]
             bsp_handler = BSPHandler(permutation)
             bsp_handler.execute()
             counter_array.append(bsp_handler.counter)
-        print("max count", max(counter_array))
-        print("min count", min(counter_array))
-        # [print(segment.display()) for segment in random_permutation_segments]
-        # bsp_handler = BSPHandler(self.plane.get_line_segments())
-        # bsp_handler.execute()
+        print("max number of nodes", max(counter_array))
+        print("min number of nodes", min(counter_array))
 
-    def test1(self):
+    def test_segments_1(self):
         a_segment = LineSegment("A", 6, 4, 7, 4)
         b_segment = LineSegment("B", 4, 3, 4, 5)
         c_segment = LineSegment("C", 8, 1, 10, 5)
@@ -43,7 +38,7 @@ class Main:
         self.plane.add_segment(b_segment)
         self.plane.add_segment(c_segment)
 
-    def test_example(self):
+    def test_segments_2(self):
         a_segment = LineSegment("A", 6, 4, 7, 4)
         b_segment = LineSegment("B", 4, 3, 4, 5)
         c_segment = LineSegment("C", 8, 1, 10, 5)
@@ -53,7 +48,7 @@ class Main:
         self.plane.add_segment(c_segment)
         self.plane.add_segment(d_segment)
 
-    def test_sebas(self):
+    def test_segments_3(self):
         a_segment = LineSegment("A", 2, 1, 4, 3)
         b_segment = LineSegment("B", 6, 0, 5, 2)
         c_segment = LineSegment("C", 4, 6, 8, 2)
@@ -72,7 +67,7 @@ class Main:
         self.plane.add_segment(g_segment)
         self.plane.add_segment(h_segment)
 
-    def test_nik(self):
+    def test_segments_4(self):
         a_segment = LineSegment("A", 4, 1, 1, 4)
         b_segment = LineSegment("B", 5, 5, 8, 5)
         c_segment = LineSegment("C", 8, 7, 10, 10)
@@ -83,22 +78,14 @@ class Main:
         h_segment = LineSegment("H", 13, 3, 13, 6)
 
         self.plane.add_segment(a_segment)
-        self.plane.add_segment(h_segment)
-        self.plane.add_segment(g_segment)
         self.plane.add_segment(b_segment)
         self.plane.add_segment(c_segment)
         self.plane.add_segment(d_segment)
         self.plane.add_segment(e_segment)
         self.plane.add_segment(f_segment)
+        self.plane.add_segment(g_segment)
+        self.plane.add_segment(h_segment)
 
-        # self.plane.add_segment(a_segment)
-        # self.plane.add_segment(b_segment)
-        # self.plane.add_segment(c_segment)
-        # self.plane.add_segment(d_segment)
-        # self.plane.add_segment(e_segment)
-        # self.plane.add_segment(f_segment)
-        # self.plane.add_segment(g_segment)
-        # self.plane.add_segment(h_segment)
 
 main = Main()
 main.run()

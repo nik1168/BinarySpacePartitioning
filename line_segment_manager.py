@@ -6,15 +6,6 @@ class LineSegmentManager:
     def __init__(self):
         pass
 
-    def get_vertical_line_position(self, point_x_segment, point_x_parent):
-        if point_x_segment < point_x_parent:
-            direction = constants.UP
-        elif point_x_segment > point_x_parent:
-            direction = constants.DOWN
-        else:
-            direction = constants.INTERSECTS
-        return direction
-
     def get_segment_direction_relative_to_straight_line(self, segment, compare_to_segment):
         if compare_to_segment.get_slope() is None:
             first_point_position = self.get_vertical_line_position(segment.start_point.get_x(),
@@ -40,13 +31,15 @@ class LineSegmentManager:
             print("No single intersection point detected")
         return r
 
-    def line(self, p1, p2):
+    @staticmethod
+    def line(p1, p2):
         a = (p1[1] - p2[1])
         b = (p2[0] - p1[0])
         c = (p1[0] * p2[1] - p2[0] * p1[1])
         return a, b, -c
 
-    def intersection(self, l1, l2):
+    @staticmethod
+    def intersection(l1, l2):
         d = l1[0] * l2[1] - l1[1] * l2[0]
         dx = l1[2] * l2[1] - l1[1] * l2[2]
         dy = l1[0] * l2[2] - l1[2] * l2[0]
@@ -57,7 +50,19 @@ class LineSegmentManager:
         else:
             return False
 
-    def get_direction_relative_to_point(self, y_prime, y_segment):
+    @staticmethod
+    def get_vertical_line_position(point_x_segment, point_x_parent):
+
+        if point_x_segment < point_x_parent:
+            direction = constants.UP
+        elif point_x_segment > point_x_parent:
+            direction = constants.DOWN
+        else:
+            direction = constants.INTERSECTS
+        return direction
+
+    @staticmethod
+    def get_direction_relative_to_point(y_prime, y_segment):
         if y_prime < y_segment:
             return constants.UP
         elif y_prime > y_segment:
@@ -65,10 +70,19 @@ class LineSegmentManager:
         else:
             return constants.INTERSECTS
 
-    def get_segment_position_relative_to_points(self, first_point_position, second_point_position):
+    @staticmethod
+    def get_segment_position_relative_to_points(first_point_position, second_point_position):
         if first_point_position == constants.UP and second_point_position == constants.UP:
             return constants.UP
         elif first_point_position == constants.DOWN and second_point_position == constants.DOWN:
             return constants.DOWN
+        elif first_point_position == constants.DOWN and second_point_position == constants.INTERSECTS:
+            return constants.DOWN
+        elif first_point_position == constants.UP and second_point_position == constants.INTERSECTS:
+            return constants.UP
+        elif first_point_position == constants.INTERSECTS and second_point_position == constants.DOWN:
+            return constants.DOWN
+        elif first_point_position == constants.INTERSECTS and second_point_position == constants.UP:
+            return constants.UP
         else:
             return constants.INTERSECTS

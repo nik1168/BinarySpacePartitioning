@@ -1,6 +1,3 @@
-from line_segment import LineSegment
-
-
 class Plane:
 
     def __init__(self):
