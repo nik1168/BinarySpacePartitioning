@@ -4,7 +4,6 @@ import os
 import sys
 
 from bsp_handler import BSPHandler
-from line_segment_manager import LineSegmentManager
 from plane import Plane
 from segment_mapper import SegmentMapper
 
@@ -14,7 +13,6 @@ class Main:
         print("Binary Space Partitioning")
         self.segment_mapper = SegmentMapper()
         self.plane = Plane()
-        self.line_segment_manager = LineSegmentManager()
 
     def run(self):
         """
