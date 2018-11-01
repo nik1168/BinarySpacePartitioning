@@ -1,4 +1,5 @@
 import itertools
+import math
 
 from bsp_handler import BSPHandler
 from line_segment import LineSegment
@@ -17,6 +18,7 @@ class Main:
         # self.test_segments_1()
         self.test_segments_4()
         print("All possible permutations")
+        n = len(self.plane.get_line_segments())
         all_possible_permutation = list(itertools.permutations(self.plane.get_line_segments()))
         counter_array = []
         for i, permutation in enumerate(all_possible_permutation):
@@ -24,9 +26,11 @@ class Main:
             [print(segment.display()) for segment in permutation]
             bsp_handler = BSPHandler(permutation)
             bsp_handler.execute()
-            counter_array.append(bsp_handler.counter)
-        print("max number of nodes", max(counter_array))
-        print("min number of nodes", min(counter_array))
+            counter_array.append(bsp_handler.node_counter)
+        print("max number of nodes: ", max(counter_array))
+        print("min number of nodes: ", min(counter_array))
+        upper_bound = n * math.log2(n)
+        print("Upper bound: ", upper_bound)
 
     def test_segments_1(self):
         a_segment = LineSegment("A", 6, 4, 7, 4)

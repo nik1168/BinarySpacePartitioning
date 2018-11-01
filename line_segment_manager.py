@@ -25,10 +25,6 @@ class LineSegmentManager:
         l1_prime = line_segment_a.get_line()
         l2_prime = line_segment_b.get_line()
         r = self.intersection(l1_prime, l2_prime)
-        if r:
-            print("Intersection detected:", r)
-        else:
-            print("No single intersection point detected")
         return r
 
     @staticmethod

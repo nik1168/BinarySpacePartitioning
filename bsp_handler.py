@@ -4,6 +4,7 @@ from line_segment_manager import LineSegmentManager
 
 
 class BSPHandler:
+
     def __init__(self, line_segments):
         self.line_segments = line_segments
         self.line_segment_manager = LineSegmentManager()
