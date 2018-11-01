@@ -4,10 +4,10 @@ from point import Point
 
 
 class LineSegment:
-    def __init__(self, identifier, x_begin, x_end, y_begin, y_end):
+    def __init__(self, identifier, x_begin, y_begin, x_end, y_end):
         self.identifier = identifier
-        self.start_point = Point(x_begin, x_end)
-        self.end_point = Point(y_begin, y_end)
+        self.start_point = Point(x_begin, y_begin)
+        self.end_point = Point(x_end, y_end)
 
     def get_identifier(self):
         return self.identifier
