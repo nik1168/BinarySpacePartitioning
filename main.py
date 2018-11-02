@@ -31,11 +31,12 @@ class Main:
                     itertools.permutations(self.plane.get_line_segments()))
                 segment_node_counter_array = []
                 for i, permutation in enumerate(all_possible_permutation):
-                    print("Permutation: ", i)
+                    print("Permutation: ", i + 1)
                     [print(segment.display()) for segment in permutation]
                     bsp_handler = BSPHandler(permutation)
                     bsp_handler.execute()  # Execute algorithm
                     segment_node_counter_array.append(bsp_handler.node_counter)
+                print("All possible permutations length: ", len(all_possible_permutation))
                 print("max number of nodes: ", max(segment_node_counter_array))
                 print("min number of nodes: ", min(segment_node_counter_array))
                 upper_bound = n * math.log2(n)

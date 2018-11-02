@@ -41,4 +41,4 @@ class LineSegment:
         return (self.get_slope() * x) + self.get_displacement()
 
     def display(self):
-        return "line segment: " + self.identifier + " Init:" + self.start_point.display() + " End: " + self.end_point.display()
+        return "line segment: " + self.identifier + " Init Point:" + self.start_point.display() + " End Point: " + self.end_point.display()

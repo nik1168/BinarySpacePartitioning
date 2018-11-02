@@ -9,7 +9,6 @@ class BSPHandler:
         self.node_counter = 0
 
     def execute(self):
-        print("Executing algorithm ")
         self.set_node(self.line_segments)
         print("Node counter")
         print(self.node_counter)
