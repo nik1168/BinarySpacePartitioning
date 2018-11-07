@@ -8,7 +8,13 @@ class LineSegmentManager:
         pass
 
     def get_segment_direction_relative_to_straight_line(self, segment, compare_to_segment):
-        if compare_to_segment.get_slope() is None:
+        """
+        Return line segment orientation relative to a straight line
+        :param segment: LineSegment
+        :param compare_to_segment:  LineSegment
+        :return: direction_of_segment : String <"up", "down", "intersects">
+        """
+        if compare_to_segment.get_slope() is None:  # Check if line is vertical
             first_point_position = self.get_vertical_line_position(segment.start_point.get_x(),
                                                                    compare_to_segment.start_point.get_x())
             second_point_position = self.get_vertical_line_position(segment.end_point.get_x(),
@@ -22,21 +28,25 @@ class LineSegmentManager:
         return direction_of_segment
 
     def get_intersection_point(self, line_segment_a, line_segment_b):
-
+        """
+        Check intersection point of two line segments
+        :param line_segment_a:
+        :param line_segment_b:
+        :return: r
+        """
         l1_prime = line_segment_a.get_line()
         l2_prime = line_segment_b.get_line()
         r = self.intersection(l1_prime, l2_prime)
         return r
 
     @staticmethod
-    def line(p1, p2):
-        a = (p1[1] - p2[1])
-        b = (p2[0] - p1[0])
-        c = (p1[0] * p2[1] - p2[0] * p1[1])
-        return a, b, -c
-
-    @staticmethod
     def intersection(l1, l2):
+        """
+        Gets intersection of two lines
+        :param l1:
+        :param l2:
+        :return:
+        """
         d = l1[0] * l2[1] - l1[1] * l2[0]
         dx = l1[2] * l2[1] - l1[1] * l2[2]
         dy = l1[0] * l2[2] - l1[2] * l2[0]
@@ -49,7 +59,12 @@ class LineSegmentManager:
 
     @staticmethod
     def get_vertical_line_position(point_x_segment, point_x_parent):
-
+        """
+        Gets the position of a vertical line_segment relative to another line_segment
+        :param point_x_segment:
+        :param point_x_parent:
+        :return:
+        """
         if point_x_segment < point_x_parent:
             direction = constants.UP
         elif point_x_segment > point_x_parent:
@@ -60,6 +75,12 @@ class LineSegmentManager:
 
     @staticmethod
     def get_direction_relative_to_point(y_prime, y_segment):
+        """
+        Get orientation of point relative to a segment
+        :param y_prime: float
+        :param y_segment: float
+        :return: orientation : string <"up", "down", "intersects">
+        """
         if y_prime < y_segment:
             return constants.UP
         elif y_prime > y_segment:
@@ -69,6 +90,12 @@ class LineSegmentManager:
 
     @staticmethod
     def get_segment_position_relative_to_points(first_point_position, second_point_position):
+        """
+        Gets segment positions based on the criteria of a line segment
+        :param first_point_position:
+        :param second_point_position:
+        :return:
+        """
         if first_point_position == constants.UP and second_point_position == constants.UP:
             return constants.UP
         elif first_point_position == constants.DOWN and second_point_position == constants.DOWN:
@@ -85,6 +112,12 @@ class LineSegmentManager:
             return constants.INTERSECTS
 
     def get_segments_directions_relative_to_parent_node(self, parent_segment, segments):
+        """
+        Returns segments directions relative to a parent cell
+        :param parent_segment: LineSegment
+        :param segments: Array<LineSegment>
+        :return: segments_up, segments_down
+        """
         segments_up = []
         segments_down = []
         for segment in segments:
@@ -103,6 +136,12 @@ class LineSegmentManager:
         return segments_up, segments_down
 
     def split_intersection_into_segment(self, segment_intersect, parent_segment):
+        """
+        Split a segment in two based on intersection point of a previous segment
+        :param segment_intersect:
+        :param parent_segment:
+        :return:
+        """
         x_intersection, y_intersection = self.get_intersection_point(segment_intersect,
                                                                      parent_segment)
         segment_up_intersection = LineSegment(segment_intersect.get_identifier() + "1", x_intersection,
