@@ -15,7 +15,6 @@ class SegmentMapper:
         with open(file, 'r') as f:
             for line in f:
                 elements = line.split(",")
-                print("elements: ", elements)
                 if len(elements) == 5:
                     line_segment = LineSegment(str(elements[0]), float(elements[1]), float(elements[2]),
                                                float(elements[3]),
